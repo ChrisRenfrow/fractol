@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtolower.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/17 22:30:01 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/12 15:44:10 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/06/12 15:40:45 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/06/12 15:41:00 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "fractol.h"
 
-void 	ft_strtolower(char *str)
+void	usage(void)
 {
-	while (*str)
-	{
-		*str = ft_tolower(*str);
-		str++;
-	}
+	ft_putendl("Error: Invalid input");
+	ft_putendl("Usage - ./fractol [fractal name]");
+	ft_putendl(AVAILABLE);
+}
+
+void	ft_error(char *err)
+{
+	ft_putendl(ft_strjoin("Error: ", err));
+	exit (1);
+}
+
+void	ft_warning(char *warn)
+{
+	ft_putendl(ft_strjoin("Warning: ", warn));
 }
