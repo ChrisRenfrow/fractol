@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/11 12:07:55 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/12 16:55:38 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/12 19:10:11 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	new_instance(char *str)
 		if (!ft_strcmp(str, "julia"))
 			start_julia();
 		if (!ft_strcmp(str, "mandelbrot"))
-			;
+			start_mandel();
 		_exit(0);
 	}
 	else

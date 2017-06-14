@@ -6,13 +6,15 @@
 #    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/25 15:37:31 by crenfrow          #+#    #+#              #
-#    Updated: 2017/06/12 16:07:18 by crenfrow         ###   ########.fr        #
+#    Updated: 2017/06/14 12:37:49 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fractol
 
-FILES		= main view hooks draw image color julia utils
+FILES		= main view hooks mouse_handler \
+				key_handler draw image color \
+				julia mandel utils render_text
 CFILES		= $(addsuffix .c, $(FILES))
 OFILES		= $(addsuffix .o, $(FILES))
 SRCFILES	= $(addprefix src/, $(CFILES))

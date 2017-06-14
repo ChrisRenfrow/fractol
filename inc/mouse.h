@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   mouse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/12 15:42:07 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/14 11:49:50 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/06/13 15:05:09 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/06/13 15:09:36 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#ifndef MOUSE_H
+# define MOUSE_H
 
-void	draw_point_view(t_view *view, float x, float y, int color)
+# define MOUSE_ONE 1
+# define MOUSE_TWO 2
+# define MOUSE_THREE 3
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
+
+typedef struct		s_mbutton
 {
-	if (x > 0 && y > 0 && x < WIN_X && y < WIN_Y)
-	{
-		mlx_pixel_put(view->mlx, view->window, x, y,
-			color);
-	}
-}
+	int				one:1;
+	int				two:1;
+	int				three:1;
+	int				scroll_up:1;
+	int				scroll_down:1;
+}					t_mbutton;
+
+typedef struct		s_mouse
+{
+	int				x;
+	int				y;
+	t_mbutton		*button;
+}					t_mouse;
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/12 16:03:17 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/14 12:37:56 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "keys.h"
+# include "mouse.h"
 # include "mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -61,29 +62,48 @@ typedef struct	s_view
 {
 	void		*mlx;
 	void		*window;
+	void		*guiwin;
 	t_image		*image;
 	char		*title;
 	float		scale;
 	float		x_shift;
 	float		y_shift;
+	int			update:1;
+	int			help:1;
+	int			stat:1;
+	t_mouse		*mouse;
 	t_keys		*pressed;
 }				t_view;
 
-void			usage(void);
-void			ft_error(char *err);
-void			ft_warning(char *warn);
+void	usage(void);
+void	ft_error(char *err);
+void	ft_warning(char *warn);
 
-t_rgb			*init_rgb(t_ui r, t_ui g, t_ui b);
-int				rgb_to_hex(int r, int g, int b);
-t_rgb			*hex_to_rgb(t_ui hex);
+t_rgb	*init_rgb(t_ui r, t_ui g, t_ui b);
+int		rgb_to_hex(int r, int g, int b);
+t_rgb	*hex_to_rgb(t_ui hex);
 
-void			draw_point_view(t_view *view, float x, float y);
-t_view			*init_view(char *win_title);
-void			init_image(t_view *view);
+void	draw_point_view(t_view *view, float x, float y, int color);
+t_view	*init_view(char *win_title);
+void	init_image(t_view *view);
 
-void			start_julia(void);
+void	start_julia(void);
+void	start_mandel(void);
 
-void			redraw(t_view *view);
-void			set_hooks(t_view *view);
+void	redraw(t_view *view);
+void	set_hooks(t_view *view);
+
+int		expose_hook(t_view *view);
+int		exit_hook(t_view *view);
+
+int		mouse_press_hook(int mb_code, int x, int y, t_view *view);
+int		mouse_release_hook(int mb_code, int x, int y, t_view *view);
+int		motion_hook(int x, int y, t_view *view);
+
+int		key_press_hook(int keycode, t_view *view);
+int		key_release_hook(int keycode, t_view *view);
+
+void	print_help(t_view *view);
+void	print_coords_at_mouse(t_view *view);
 
 #endif

@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   mandel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/12 15:42:07 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/14 11:49:50 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/06/12 19:10:22 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/06/13 15:00:39 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	draw_point_view(t_view *view, float x, float y, int color)
+
+
+void	start_mandel(void)
 {
-	if (x > 0 && y > 0 && x < WIN_X && y < WIN_Y)
-	{
-		mlx_pixel_put(view->mlx, view->window, x, y,
-			color);
-	}
+	t_view *view;
+
+	view = init_view("Mandelbrot");
+	set_hooks(view);
+	mlx_loop(view->mlx);
 }
