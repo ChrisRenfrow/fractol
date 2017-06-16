@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/14 12:37:56 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/15 21:28:50 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "keys.h"
 # include "mouse.h"
 # include "mlx.h"
+# include <fcntl.h>
+# include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
@@ -43,6 +45,13 @@ typedef struct	s_rgb
 	int			b;
 }				t_rgb;
 
+typedef struct	s_cscheme
+{
+	char 		*title;
+	int			color_ct;
+	t_rgb		**colors;
+}				t_cscheme;
+
 typedef struct	s_pt2D
 {
 	float		x;
@@ -65,6 +74,7 @@ typedef struct	s_view
 	void		*guiwin;
 	t_image		*image;
 	char		*title;
+	t_list		*schemes;
 	float		scale;
 	float		x_shift;
 	float		y_shift;
@@ -78,10 +88,13 @@ typedef struct	s_view
 void	usage(void);
 void	ft_error(char *err);
 void	ft_warning(char *warn);
+int		check_ext(char *path, char *ext);
 
 t_rgb	*init_rgb(t_ui r, t_ui g, t_ui b);
 int		rgb_to_hex(int r, int g, int b);
 t_rgb	*hex_to_rgb(t_ui hex);
+
+void	get_schemes(t_view *view);
 
 void	draw_point_view(t_view *view, float x, float y, int color);
 t_view	*init_view(char *win_title);
