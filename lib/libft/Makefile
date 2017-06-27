@@ -6,7 +6,7 @@
 #    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 14:49:42 by crenfrow          #+#    #+#              #
-#    Updated: 2017/04/18 00:11:22 by crenfrow         ###   ########.fr        #
+#    Updated: 2017/06/17 16:26:00 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ CFILES 		= $(addsuffix .c, $(FILENAMES))
 SOURCES		= $(addprefix src/, $(CFILES))
 BUILD 		= $(addprefix build/, $(CFILES:.c=.o))
 INCDIR		= -I inc/
-FLAGS 		= -Wall -Wextra -Werror
+FLAGS 		= -g -Wall -Wextra -Werror
 CC 			= gcc
 
 all: $(NAME)

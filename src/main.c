@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/11 12:07:55 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/12 19:10:11 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/18 17:06:52 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	new_instance(char *str)
 
 int		main(int ac, char *av[])
 {
+	// (void)av;
+	// (void)ac;
+
 	int i;
 
 	i = 0;
@@ -46,5 +49,6 @@ int		main(int ac, char *av[])
 		else
 			ft_warning(ft_strjoin("Bad option - Skipping ", av[i]));
 	}
+
 	return (0);
 }

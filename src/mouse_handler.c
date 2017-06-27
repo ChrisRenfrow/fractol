@@ -6,11 +6,33 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:00:00 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/14 12:18:33 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/16 13:17:04 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+t_mbutton *init_mbutton(void)
+{
+	t_mbutton *mbuttons = (t_mbutton*)malloc(sizeof(t_mbutton));
+	mbuttons->one = 0;
+	mbuttons->two = 0;
+	mbuttons->three = 0;
+	mbuttons->scroll_up = 0;
+	mbuttons->scroll_down = 0;
+	return (mbuttons);
+}
+
+t_mouse	*init_mouse(void)
+{
+	t_mouse *mouse;
+
+	mouse = (t_mouse *)malloc(sizeof(t_mouse));
+	mouse->x = 0;
+	mouse->y = 0;
+	mouse->button = init_mbutton();
+	return(mouse);
+}
 
 void	toggle_mouse(int mb_code, int toggle, t_view *view)
 {
