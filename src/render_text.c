@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 12:37:06 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/14 12:38:36 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/29 00:45:30 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_help(t_view *view)
 	{
 		mlx_string_put(view->mlx, view->window,
 			WIN_X - 300,
-			0 + row * 20,
+			row * 20,
 			rgb_to_hex(255,255,255),
 			strs[row]);
 	}

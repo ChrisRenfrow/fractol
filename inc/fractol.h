@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/18 16:07:02 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/28 19:14:45 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct	s_cscheme
 {
 	char 		*title;
 	int			color_ct;
-	t_rgb		*colors;
+	t_list		*colors;
 }				t_cscheme;
 
 typedef struct	s_pt2D
@@ -74,7 +74,7 @@ typedef struct	s_view
 	void		*window;
 	t_image		*image;
 	char		*title;
-	t_cscheme	*schemes;
+	t_list		*schemes;
 	int			scheme_id;
 	int			max_iter;
 	int			update:1;

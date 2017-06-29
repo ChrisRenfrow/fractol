@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:06:46 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/18 08:47:04 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/29 13:44:59 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_view	*init_view(char *win_title)
 	if (!(view->window = mlx_new_window(view->mlx, WIN_X, WIN_Y, view->title)))
 		ft_error("Initializing window - Not enough memory");
 	init_image(view);
-	view->schemes = (t_cscheme*)malloc(sizeof(t_cscheme));
+	view->schemes = ft_lstnew(NULL, sizeof(t_cscheme));
 	get_schemes(view);
 	view->scheme_id = 0;
 	view->mouse = init_mouse();

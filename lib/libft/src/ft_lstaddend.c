@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/01 00:08:54 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/17 18:08:06 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/29 13:50:05 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_lstaddend(t_list **alst, t_list *new)
 {
-	if (!*alst)
+	if (!new)
 		return ;
-	if ((*alst)->next)
+	if (alst && (*alst)->next)
 		ft_lstaddend(&(*alst)->next, new);
 	else
 		(*alst)->next = new;

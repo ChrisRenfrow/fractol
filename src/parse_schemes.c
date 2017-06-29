@@ -6,27 +6,12 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 13:12:18 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/18 16:07:40 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/06/29 13:57:40 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	*ft_arraddend(void *arr, void *elem, size_t size)
-{
-	int i;
-	char *tmp;
-	char *new;
-
-	i = -1;
-	tmp = (char *)arr;
-	new = (char *)elem;
-	while (tmp[++i] != 0)
-		;
-	tmp = ft_realloc(tmp, i * size);
-	tmp[i] = *new;
-	return (tmp);
-}
 
 static int	rgbchk(int c)
 {
@@ -44,9 +29,7 @@ static void			parse_scheme(t_view *view, char *path)
 	char *line;
 	char **split;
 	t_rgb *col;
-	t_cscheme* sch;
-
-	(void)view;
+	t_cscheme *sch;
 
 	fd = open(path, O_RDONLY, 0700);
 	i = -1;
@@ -56,24 +39,31 @@ static void			parse_scheme(t_view *view, char *path)
 		if (++i == 0)
 		{
 			sch->title = ft_strdup(line);
-			continue;
+			continue ;
 		}
 		split = ft_strsplit(line, ' ');
 		if (split[0] && split[1] && split[2])
 		{
-			col = init_rgb(rgbchk(ft_atoi(split[0])),rgbchk(ft_atoi(split[1])),
+			col = init_rgb(
+				rgbchk(ft_atoi(split[0])),
+				rgbchk(ft_atoi(split[1])),
 				rgbchk(ft_atoi(split[2])));
-
+			if (sch->colors)
+				ft_lstaddend(&sch->colors, ft_lstnew(col, sizeof(t_rgb)));
+			else
+				ft_lstadd(&sch->colors, ft_lstnew(col, sizeof(t_rgb)));
 		} else {
-			ft_warning(ft_strjoin("Bad color scheme - Skipping ",
-			sch->title));
+			ft_warning(ft_strjoin("Bad color scheme - Skipping ", sch->title));
 			close(fd);
-			return;
+			return ;
 		}
 		free(line);
 	}
 	sch->color_ct = i;
-
+	if (view->schemes)
+		ft_lstaddend(&view->schemes, ft_lstnew(sch, sizeof(t_cscheme)));
+	else
+		ft_lstadd(&view->schemes, ft_lstnew(sch, sizeof(t_cscheme)));
 	close(fd);
 }
 
