@@ -6,17 +6,17 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:06:46 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/29 13:44:59 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/02 12:11:40 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_view	*init_view(char *win_title)
+t_view *init_view(char *win_title)
 {
-	t_view	*view;
+	t_view *view;
 
-	view = (t_view *)malloc(sizeof(t_view));
+	view = (t_view *) malloc(sizeof(t_view));
 	if (!(view->mlx = mlx_init()))
 		ft_error("Initializing mlx - Not enough memory");
 	view->title = ft_strjoin(TITLE, win_title);
@@ -26,8 +26,10 @@ t_view	*init_view(char *win_title)
 	view->schemes = ft_lstnew(NULL, sizeof(t_cscheme));
 	get_schemes(view);
 	view->scheme_id = 0;
+	view->scheme_ct = 1;
 	view->mouse = init_mouse();
-	view->max_iter = 10;
-	view->pressed = (t_keys *)ft_memalloc(sizeof(t_keys));
+	view->max_iter = 25;
+	view->pressed = (t_keys *) ft_memalloc(sizeof(t_keys));
+	view->update = 1;
 	return (view);
 }

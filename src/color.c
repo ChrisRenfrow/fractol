@@ -6,29 +6,29 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 11:39:20 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/16 19:47:14 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/01 19:47:28 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_rgb		*init_rgb(t_ui r, t_ui g, t_ui b)
+t_rgb *init_rgb(t_ui r, t_ui g, t_ui b)
 {
 	t_rgb *rgb;
 
-	rgb = (t_rgb *)malloc(sizeof(t_rgb));
+	rgb = (t_rgb *) malloc(sizeof(t_rgb));
 	rgb->r = r;
 	rgb->g = g;
 	rgb->b = b;
 	return (rgb);
 }
 
-int			rgb_to_hex(int r, int g, int b)
+int rgb_to_hex(int r, int g, int b)
 {
 	return ((r << 16) + (g << 8) + b);
 }
 
-t_rgb		*hex_to_rgb(unsigned int hex)
+t_rgb *hex_to_rgb(unsigned int hex)
 {
 	t_rgb *rgb;
 

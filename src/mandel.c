@@ -6,42 +6,60 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:10:22 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/29 13:47:08 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/01 19:48:40 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	prt_rgb_lst(t_list *elem)
+static int eval_pt(t_view *view, double re, double im)
 {
-	if (elem)
+	int    i;
+	double x;
+	double y;
+	double tmp;
+
+	i = -1;
+	x = 0.0;
+	y = 0.0;
+	re = ((re / WIN_X) * 2.8) + (-3 / 2) - (2.8 * 0.5);
+	im = ((im / WIN_Y) * 2.8) + (0.0 / 2) - (2.8 * 0.5);
+	while ((++i < view->max_iter) && ((x * x) + (y * y) < 4))
 	{
-		t_rgb *col = (t_rgb*)elem->content;
-		if (col)
-			printf(" - %d, %d, %d\n", col->r, col->g, col->b);
+		tmp = (x * x) - (y * y) + re;
+		y = (2 * x * y) + im;
+		x = tmp;
 	}
+	return (i);
 }
 
-void	prt_scheme_lst(t_list *elem)
+static void eval_rows(t_view *view)
 {
-	if (elem)
+	int x;
+	int y;
+	int i;
+
+	i = 0;
+	y = -1;
+	while (++y < WIN_Y)
 	{
-		t_cscheme *sch = (t_cscheme*)elem->content;
-		if (sch)
+		x = -1;
+		while (++x < WIN_X)
 		{
-			printf("Color scheme \"%s\" - %dct\n", sch->title, sch->color_ct);
-			ft_lstiter(((t_cscheme*)sch)->colors, &prt_rgb_lst);
+			i = eval_pt(view, x, y);
+			if (i < view->max_iter)
+				draw_point_view(view, x, y, color_for_escape(view, i));
 		}
 	}
 }
 
-void	start_mandel(void)
+void start_mandel(void)
 {
 	t_view *view;
 
 	view = init_view("Mandelbrot");
-
 	ft_lstiter(view->schemes, &prt_scheme_lst);
+	view->draw_func = eval_rows;
 	set_hooks(view);
 	mlx_loop(view->mlx);
 }

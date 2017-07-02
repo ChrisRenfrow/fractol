@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/06/28 19:14:45 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/02 14:41:52 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ typedef struct	s_view
 	char		*title;
 	t_list		*schemes;
 	int			scheme_id;
+	int			scheme_ct;
 	int			max_iter;
+	void		*draw_func;
+	void		*reset_func;
 	int			update:1;
 	int			help:1;
 	int			stat:1;
@@ -88,6 +91,8 @@ void		usage(void);
 void		ft_error(char *err);
 void		ft_warning(char *warn);
 int			check_ext(char *path, char *ext);
+void		prt_rgb_lst(t_list *elem);
+void		prt_scheme_lst(t_list *elem);
 
 void		*ft_arraddend(void *arr, void *elem, size_t size);
 
@@ -97,10 +102,11 @@ t_rgb		*hex_to_rgb(t_ui hex);
 
 t_cscheme	*init_scheme(void);
 void		get_schemes(t_view *view);
+void		change_scheme(t_view *view, int id);
 
 t_rgb		color_for_escape(t_view *view, int vel);
 
-void		draw_point_view(t_view *view, float x, float y, int color);
+void		draw_point_view(t_view *view, float x, float y, t_rgb color);
 t_view		*init_view(char *win_title);
 void		init_image(t_view *view);
 
