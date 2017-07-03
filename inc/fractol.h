@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/02 17:26:30 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/03 16:08:34 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define WIN_Y			WIN_RES
 # define X_CENTER		WIN_X / 2
 # define Y_CENTER		WIN_Y / 2
+# define THREAD_COUNT	10
 
 # define RANGE_CHANGE(x,a,b,min,max) (((b)-(a))*((x)-(min))/((max)-(min)))+(a)
 
@@ -87,6 +88,12 @@ typedef struct	s_view
 	t_keys		*pressed;
 }				t_view;
 
+typedef struct	s_thread
+{
+	t_view		*view;
+	int			id;
+}				t_thread;
+
 void		usage(void);
 void		ft_error(char *err);
 void		ft_warning(char *warn);
@@ -113,6 +120,9 @@ void		init_image(t_view *view);
 void		draw_point_image(t_view *view, int x, int y, t_rgb color);
 void		image_to_view(t_view *view, void *image);
 void		reset_image(t_view *view);
+
+pthread_t	new_thread(t_view *view, int i, void *func);
+void		destroy_thread(t_thread *t);
 
 void		start_julia(void);
 void		start_mandel(void);

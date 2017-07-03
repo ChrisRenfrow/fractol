@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:39:32 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/03 11:29:59 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/03 16:16:47 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int eval_pt(t_view *view, double x, double y)
 	return (i);
 }
 
-static void eval_rows(t_view *view)
+static void eval_rows(t_thread *t)
 {
 	int x;
 	int y;
@@ -47,16 +47,30 @@ static void eval_rows(t_view *view)
 
 	i = 0;
 	y = -1;
-	while (++y < WIN_Y)
+	y = ((WIN_Y / THREAD_COUNT) * t->id) - 2;
+	while (++y < ((WIN_Y / THREAD_COUNT) * (t->id + 1)))
 	{
 		x = -1;
 		while (++x < WIN_X)
 		{
-			i = eval_pt(view, x, y);
-			if (i < view->max_iter)
-				draw_point_image(view, x, y, *init_rgb(i * 10, i * 10, i * 10));
+			i = eval_pt(t->view, x, y);
+			if (i < t->view->max_iter)
+				draw_point_image(t->view, x, y, *init_rgb(i * 10, i * 10, i * 10));
 		}
 	}
+}
+
+static void draw(t_view *view)
+{
+	int			i;
+	pthread_t	threads[THREAD_COUNT];
+
+	i = -1;
+	while (++i < THREAD_COUNT)
+		threads[i] = new_thread(view, i, (void*)eval_rows);
+	i = -1;
+	while (++i < THREAD_COUNT)
+		pthread_join(threads[i], NULL);
 	image_to_view(view, view->image->ptr);
 }
 
@@ -65,7 +79,7 @@ void start_julia(void)
 	t_view *view;
 
 	view = init_view("Julia");
-	view->draw_func = eval_rows;
+	view->draw_func = draw;
 	view->reset_func = reset;
 	set_hooks(view);
 	mlx_loop(view->mlx);
