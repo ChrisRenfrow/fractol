@@ -6,11 +6,17 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:10:22 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/01 19:48:40 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/03 11:31:31 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void reset(t_view *view)
+{
+	view->mouse->x = 0;
+	view->mouse->y = 0;
+}
 
 static int eval_pt(t_view *view, double re, double im)
 {
@@ -20,8 +26,8 @@ static int eval_pt(t_view *view, double re, double im)
 	double tmp;
 
 	i = -1;
-	x = 0.0;
-	y = 0.0;
+	x = (double)(view->mouse->x * -0.001);
+	y = (double)(view->mouse->y * -0.001);
 	re = ((re / WIN_X) * 2.8) + (-3 / 2) - (2.8 * 0.5);
 	im = ((im / WIN_Y) * 2.8) + (0.0 / 2) - (2.8 * 0.5);
 	while ((++i < view->max_iter) && ((x * x) + (y * y) < 4))
@@ -48,9 +54,10 @@ static void eval_rows(t_view *view)
 		{
 			i = eval_pt(view, x, y);
 			if (i < view->max_iter)
-				draw_point_view(view, x, y, color_for_escape(view, i));
+				draw_point_image(view, x, y, *init_rgb(i * 10, i * 10, i * 10));
 		}
 	}
+	image_to_view(view, view->image->ptr);
 }
 
 void start_mandel(void)
@@ -60,6 +67,7 @@ void start_mandel(void)
 	view = init_view("Mandelbrot");
 	ft_lstiter(view->schemes, &prt_scheme_lst);
 	view->draw_func = eval_rows;
+	view->reset_func = reset;
 	set_hooks(view);
 	mlx_loop(view->mlx);
 }

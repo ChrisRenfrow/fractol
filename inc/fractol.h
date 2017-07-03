@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/02 14:41:52 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/02 17:26:30 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,11 @@ t_rgb		color_for_escape(t_view *view, int vel);
 
 void		draw_point_view(t_view *view, float x, float y, t_rgb color);
 t_view		*init_view(char *win_title);
+
 void		init_image(t_view *view);
+void		draw_point_image(t_view *view, int x, int y, t_rgb color);
+void		image_to_view(t_view *view, void *image);
+void		reset_image(t_view *view);
 
 void		start_julia(void);
 void		start_mandel(void);

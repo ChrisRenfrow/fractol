@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:06:46 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/02 12:11:40 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/03 11:14:56 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_view *init_view(char *win_title)
 	view->schemes = ft_lstnew(NULL, sizeof(t_cscheme));
 	get_schemes(view);
 	view->scheme_id = 0;
-	view->scheme_ct = 1;
+	view->scheme_ct = 0;
 	view->mouse = init_mouse();
 	view->max_iter = 25;
 	view->pressed = (t_keys *) ft_memalloc(sizeof(t_keys));
