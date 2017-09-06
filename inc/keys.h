@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/29 19:05:17 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/01 19:48:20 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/04 11:36:05 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 #define KEY_N 45
 #define KEY_M 46
 #define KEY_TAB 48
+#define KEY_SPACE 49
 #define KEY_PLUS 69
 #define KEY_MINUS 78
 #define KEY_LEFT 123

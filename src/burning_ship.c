@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandel.c                                           :+:      :+:    :+:   */
+/*   burning_ship.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/12 19:10:22 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/04 12:10:11 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/09/06 13:44:23 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/09/06 14:20:59 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ static void draw(t_view *view)
 	image_to_view(view, view->image->ptr);
 }
 
-void start_mandel(void)
+void start_ship(void)
 {
 	t_view *view;
 
-	view = init_view("Mandelbrot");
+	view = init_view("🔥 Burning Ship 🔥");
 	view->draw_func = draw;
 	view->reset_func = reset;
 	set_hooks(view);

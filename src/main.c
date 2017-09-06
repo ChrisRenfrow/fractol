@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/11 12:07:55 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/03 11:30:34 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/06 13:43:15 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void new_instance(char *str)
 			start_julia();
 		if (!ft_strcmp(str, "mandelbrot"))
 			start_mandel();
+		if (!ft_strcmp(str, "burning-ship"))
+			start_ship();
 		_exit(0);
 	}
 	else
@@ -42,7 +44,9 @@ int main(int ac, char *av[])
 		usage();
 	while (++i < ac)
 	{
-		if (!ft_strcmp(av[i], "julia") || !ft_strcmp(av[i], "mandelbrot"))
+		if (!ft_strcmp(av[i], "julia") ||
+			!ft_strcmp(av[i], "mandelbrot") ||
+			!ft_strcmp(av[i], "burning-ship"))
 			new_instance(av[i]);
 		else
 			ft_warning(ft_strjoin("Bad option - Skipping ", av[i]));

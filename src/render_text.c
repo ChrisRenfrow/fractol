@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 12:37:06 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/01 19:47:45 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/04 11:43:36 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void print_help(t_view *view)
 	char **strs =
 	    ft_strsplit("Key-commands:\n - h : brings up this window\n - 1 : "
 	                "displays statistics\n - mouse movement : modifies\n   "
-	                "fractal\n - escape : exit program\n(press h to dismiss)",
+	                "fractal\n - space : toggles mouse\n   movement\n"
+					"- escape : exit program\n(press h to dismiss)",
 	                '\n');
-
 	row = -1;
 	while (strs[++row])
 	{

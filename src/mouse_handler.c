@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:00:00 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/01 19:47:36 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/04 11:38:52 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ int motion_hook(int x, int y, t_view *view)
 	{
 		// printf("Mouse moved to %d, %d in %s instance - PID %d\n", x, y,
 		// view->title, getpid());
-		view->mouse->x = x;
-		view->mouse->y = y;
-		view->update = 1;
+		if (!view->freeze)
+		{
+			view->mouse->x = x;
+			view->mouse->y = y;
+			view->update = 1;
+		}
 	}
 	return (0);
 }

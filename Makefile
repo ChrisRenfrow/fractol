@@ -6,7 +6,7 @@
 #    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/25 15:37:31 by crenfrow          #+#    #+#              #
-#    Updated: 2017/07/03 15:36:19 by crenfrow         ###   ########.fr        #
+#    Updated: 2017/09/06 13:47:39 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME		= fractol
 
 FILES		= main view hooks mouse_handler \
 				key_handler draw image color \
-				julia mandel utils render_text \
-				parse_schemes color_scheme thread 
+				julia mandel burning_ship utils \
+				render_text parse_schemes \
+				color_scheme thread
+
 CFILES		= $(addsuffix .c, $(FILES))
 OFILES		= $(addsuffix .o, $(FILES))
 SRCFILES	= $(addprefix src/, $(CFILES))

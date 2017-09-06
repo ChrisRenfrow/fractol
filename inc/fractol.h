@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/03 16:08:34 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/06 13:45:50 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@
 # define WIN_Y			WIN_RES
 # define X_CENTER		WIN_X / 2
 # define Y_CENTER		WIN_Y / 2
-# define THREAD_COUNT	10
+# define THREAD_COUNT	15
 
 # define RANGE_CHANGE(x,a,b,min,max) (((b)-(a))*((x)-(min))/((max)-(min)))+(a)
 
-# define AVAILABLE "Available options:\n- julia\n- mandelbrot\n- ..."
+# define AVAILABLE "Available options:\n- julia\n- mandelbrot\n- burning-ship\n"
 # define SCHEME_PATH "color_schemes/"
 
 typedef unsigned int	t_ui;
@@ -84,6 +84,7 @@ typedef struct	s_view
 	int			update:1;
 	int			help:1;
 	int			stat:1;
+	int			freeze:1;
 	t_mouse		*mouse;
 	t_keys		*pressed;
 }				t_view;
@@ -126,6 +127,7 @@ void		destroy_thread(t_thread *t);
 
 void		start_julia(void);
 void		start_mandel(void);
+void		start_ship(void);
 
 void		redraw(t_view *view);
 void		set_hooks(t_view *view);

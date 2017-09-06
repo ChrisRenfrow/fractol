@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:39:32 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/03 16:16:47 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/04 12:05:37 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void eval_rows(t_thread *t)
 		{
 			i = eval_pt(t->view, x, y);
 			if (i < t->view->max_iter)
-				draw_point_image(t->view, x, y, *init_rgb(i * 10, i * 10, i * 10));
+				draw_point_image(t->view, x, y, color_for_escape(t->view, i));
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/16 13:12:18 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/01 18:34:17 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/07/04 12:10:48 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int rgbchk(int c)
 
 static void parse_scheme(t_view *view, char *path)
 {
-	int        fd;
-	int        i;
-	char *     line;
-	char **    split;
-	t_rgb *    col;
-	t_cscheme *sch;
+	int			fd;
+	int			i;
+	char		*line;
+	char		**split;
+	t_rgb		*col;
+	t_cscheme	*sch;
 
 	fd = open(path, O_RDONLY, 0700);
 	i = -1;
@@ -44,7 +44,7 @@ static void parse_scheme(t_view *view, char *path)
 		if (split[0] && split[1] && split[2])
 		{
 			col = init_rgb(rgbchk(ft_atoi(split[0])), rgbchk(ft_atoi(split[1])), rgbchk(ft_atoi(split[2])));
-			if (sch->colors)
+			if (sch->colors->content)
 				ft_lstaddend(&sch->colors, ft_lstnew(col, sizeof(t_rgb)));
 			else
 				ft_lstadd(&sch->colors, ft_lstnew(col, sizeof(t_rgb)));
@@ -58,7 +58,7 @@ static void parse_scheme(t_view *view, char *path)
 		free(line);
 	}
 	sch->color_ct = i;
-	if (view->schemes)
+	if (view->schemes->content)
 		ft_lstaddend(&view->schemes, ft_lstnew(sch, sizeof(t_cscheme)));
 	else
 		ft_lstadd(&view->schemes, ft_lstnew(sch, sizeof(t_cscheme)));
@@ -67,10 +67,8 @@ static void parse_scheme(t_view *view, char *path)
 
 void get_schemes(t_view *view)
 {
-	DIR *          dirp;
-	struct dirent *ndirp;
-
-	(void) view;
+	DIR				*dirp;
+	struct dirent	*ndirp;
 
 	if (!(dirp = opendir(SCHEME_PATH)))
 		ft_error("Unable to open 'color_schemes/' - File missing or access "
@@ -84,4 +82,5 @@ void get_schemes(t_view *view)
 			parse_scheme(view, ft_strjoin(SCHEME_PATH, ndirp->d_name));
 		}
 	}
+	ft_lstiter(view->schemes, prt_scheme_lst);
 }
