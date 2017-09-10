@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:44:23 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/06 14:20:59 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/09 21:50:35 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void reset(t_view *view)
 	view->mouse->y = 0;
 }
 
-static int eval_pt(t_view *view, double re, double im)
+static int eval_pt(t_view *view, double x0, double y0)
 {
 	int    i;
 	double x;
@@ -28,12 +28,14 @@ static int eval_pt(t_view *view, double re, double im)
 	i = -1;
 	x = (double)(view->mouse->x * -0.001);
 	y = (double)(view->mouse->y * -0.001);
-	re = ((re / WIN_X) * 2.8) + (-3 / 2) - (2.8 * 0.5);
-	im = ((im / WIN_Y) * 2.8) + (0.0 / 2) - (2.8 * 0.5);
-	while ((++i < view->max_iter) && ((x * x) + (y * y) < 4))
+
+	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) - (view->apt * 0.5);
+	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) - (view->apt * 0.5);
+
+	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
-		tmp = (x * x) - (y * y) + re;
-		y = (2 * x * y) + im;
+		tmp = (x * x) - (y * y) + x0;
+		y = (2 * x * y) + y0;
 		x = tmp;
 	}
 	return (i);
@@ -53,7 +55,7 @@ static void eval_rows(t_thread *t)
 		while (++x < WIN_X)
 		{
 			i = eval_pt(t->view, x, y);
-			if (i < t->view->max_iter)
+			if (i < t->view->iter)
 				draw_point_image(t->view, x, y, color_for_escape(t->view, i));
 		}
 	}

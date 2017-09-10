@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:00:00 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/04 11:38:52 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/09 22:19:32 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ t_mouse *init_mouse(void)
 	return (mouse);
 }
 
+void zoom_in(t_view *view) {
+	view->apt += 0.1;
+}
+
+void zoom_out(t_view *view) {
+	view->apt -= 0.1;
+}
+
 void toggle_mouse(int mb_code, int toggle, t_view *view)
 {
 	if (mb_code == MOUSE_ONE)
@@ -43,9 +51,9 @@ void toggle_mouse(int mb_code, int toggle, t_view *view)
 	if (mb_code == MOUSE_THREE)
 		view->mouse->button->three = toggle;
 	if (mb_code == MOUSE_SCROLL_UP)
-		view->mouse->button->scroll_up = toggle;
+		zoom_in(view);
 	if (mb_code == MOUSE_SCROLL_DOWN)
-		view->mouse->button->scroll_down = toggle;
+		zoom_out(view);
 }
 
 int mouse_press_hook(int mb_code, int x, int y, t_view *view)

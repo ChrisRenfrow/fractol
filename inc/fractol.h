@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/06 13:45:50 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/09 21:47:34 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_view
 	t_list		*schemes;
 	int			scheme_id;
 	int			scheme_ct;
+	int			iter;
 	int			max_iter;
 	void		*draw_func;
 	void		*reset_func;
@@ -85,6 +86,9 @@ typedef struct	s_view
 	int			help:1;
 	int			stat:1;
 	int			freeze:1;
+	double		x_offset;
+	double		y_offset;
+	double		apt;
 	t_mouse		*mouse;
 	t_keys		*pressed;
 }				t_view;
@@ -145,6 +149,6 @@ int			key_press_hook(int keycode, t_view *view);
 int			key_release_hook(int keycode, t_view *view);
 
 void		print_help(t_view *view);
-void		print_coords_at_mouse(t_view *view);
+void		print_stats_at_mouse(t_view *view);
 
 #endif
