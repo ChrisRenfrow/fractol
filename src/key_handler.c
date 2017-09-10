@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:02:17 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/04 11:36:17 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/09 21:55:43 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void redraw(t_view *view)
 		if (view->help)
 			print_help(view);
 		if (view->stat)
-			print_coords_at_mouse(view);
+			print_stats_at_mouse(view);
 		view->update = 0;
 	}
 }
@@ -56,6 +56,10 @@ int key_press_hook(int keycode, t_view *view)
 		reset_view(view);
 	if (keycode == KEY_SPACE)
 		view->freeze = (view->freeze) ? 0 : 1;
+	if (keycode == KEY_STDEQU)
+		view->iter = (view->iter + 1 > view->max_iter) ? view->max_iter : view->iter + 1;
+	if (keycode == KEY_STDMIN)
+		view->iter = (view->iter - 1 < 0) ? view->max_iter : view->iter - 1;
 	view->update = 1;
 	return (0);
 }

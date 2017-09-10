@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:39:32 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/04 12:05:37 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/09 22:05:11 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,29 @@ static void reset(t_view *view)
 {
 	view->mouse->x = 0;
 	view->mouse->y = 0;
+	view->x_offset = -3.3;
+	view->y_offset = -1.5;
+	view->apt = 3;
 }
 
 static int eval_pt(t_view *view, double x, double y)
 {
 	int    i;
-	double re;
-	double im;
+	double x0;
+	double y0;
 	double tmp;
 
 	i = 0;
-	x = ((x / WIN_X) * 3) - 1.1 - (3 * 0.5);
-	y = ((y / WIN_X) * 3) - 0.5 - (3 * 0.5);
-	re = ((view->mouse->x - (WIN_X / 2)) / WIN_X);
-	im = ((view->mouse->y - (WIN_Y / 2)) / WIN_Y);
-	while ((++i < view->max_iter) && ((x * x) + (y * y) < 4))
+	x0 = (double)((view->mouse->x - (WIN_X / 2)) / WIN_X);
+	y0 = (double)((view->mouse->y - (WIN_Y / 2)) / WIN_Y);
+
+	x = ((x / WIN_X) * view->apt) + (view->x_offset / view->apt) - (view->apt * 0.5);
+	y = ((y / WIN_Y) * view->apt) + (view->y_offset / view->apt) - (view->apt * 0.5);
+
+	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
-		tmp = (x * x) - (y * y) + re;
-		y = (2 * x * y) + im;
+		tmp = (x * x) - (y * y) + x0;
+		y = (2 * x * y) + y0;
 		x = tmp;
 	}
 	return (i);
@@ -54,7 +59,7 @@ static void eval_rows(t_thread *t)
 		while (++x < WIN_X)
 		{
 			i = eval_pt(t->view, x, y);
-			if (i < t->view->max_iter)
+			if (i < t->view->iter)
 				draw_point_image(t->view, x, y, color_for_escape(t->view, i));
 		}
 	}
