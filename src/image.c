@@ -6,22 +6,24 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:41:12 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/03 11:28:03 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 16:31:34 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void init_image(t_view *view)
+void	init_image(t_view *view)
 {
-	t_image *img = (t_image *)malloc(sizeof(t_image));
+	t_image *img;
+
+	img = (t_image *)malloc(sizeof(t_image));
 	if (!img)
 		ft_error("Initializing image - Not enough memory");
 	view->image = img;
 	reset_image(view);
 }
 
-void reset_image(t_view *view)
+void	reset_image(t_view *view)
 {
 	t_image *img;
 
@@ -31,7 +33,7 @@ void reset_image(t_view *view)
 		&(img->bits_per_pixel), &(img->size_line), &(img->endian));
 }
 
-void image_to_view(t_view *view, void *image)
+void	image_to_view(t_view *view, void *image)
 {
 	mlx_put_image_to_window(view->mlx, view->window, image, 0, 0);
 	mlx_destroy_image(view->mlx, image);

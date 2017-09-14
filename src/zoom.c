@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread.c                                           :+:      :+:    :+:   */
+/*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/03 13:23:57 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 11:22:14 by crenfrow         ###   ########.fr       */
+/*   Created: 2017/09/13 11:07:56 by crenfrow          #+#    #+#             */
+/*   Updated: 2017/09/13 12:01:19 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		destroy_thread(t_thread *t)
+void	zoom(t_view *view, int x, int y, float factor)
 {
-	if (t)
-		free(t);
-	else
-		ft_error("Freeing thread - Unable to free NULL");
-}
+	float	zoom;
+	float	diff;
+	float	offset_x;
+	float	offset_y;
 
-pthread_t	new_thread(t_view *view, int i, void *func)
-{
-	pthread_t	pt;
-	t_thread	*t;
-
-	t = (t_thread*)malloc(sizeof(t_thread));
-	t->id = i;
-	t->view = view;
-	pthread_create(&pt, NULL, func, t);
-	return (pt);
+	zoom = view->apt * factor;
+	diff = zoom - view->apt;
+	offset_x = (((float)((WIN_X / 2) - x) / WIN_X) * diff);
+	offset_y = (((float)((WIN_Y / 2) - y) / WIN_Y) * diff);
+	view->x_offset += offset_x;
+	view->y_offset += offset_y;
+	view->apt = zoom;
 }

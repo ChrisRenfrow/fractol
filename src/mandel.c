@@ -6,36 +6,38 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:10:22 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/09 21:50:29 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 16:37:27 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void reset(t_view *view)
+static void		reset(t_view *view)
 {
-	view->mouse->x = 0;
-	view->mouse->y = 0;
-	view->x_offset = -5;
+	view->mouse->x = WIN_X / 2;
+	view->mouse->y = WIN_Y / 2;
+	view->x_offset = -3;
 	view->y_offset = 0;
+	view->iter = 50;
 	view->apt = 2;
 }
 
-static int eval_pt(t_view *view, double x, double y)
+static int		eval_pt(t_view *view, double x, double y)
 {
-	int    i;
-	double x0 = x;
-	double y0 = y;
-
-	double tmp;
+	int		i;
+	double	x0;
+	double	y0;
+	double	tmp;
 
 	i = -1;
+	x0 = x;
+	y0 = y;
 	x = (double)((view->mouse->x - (WIN_X / 2)) / WIN_X);
 	y = (double)((view->mouse->y - (WIN_Y / 2)) / WIN_Y);
-
-	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) - (view->apt * 0.5);
-	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) - (view->apt * 0.5);
-
+	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) -
+		(view->apt * 0.5);
+	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) -
+		(view->apt * 0.5);
 	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
 		tmp = (x * x) - (y * y) + x0;
@@ -45,7 +47,7 @@ static int eval_pt(t_view *view, double x, double y)
 	return (i);
 }
 
-static void eval_rows(t_thread *t)
+static void		eval_rows(t_thread *t)
 {
 	int x;
 	int y;
@@ -65,7 +67,7 @@ static void eval_rows(t_thread *t)
 	}
 }
 
-static void draw(t_view *view)
+static void		draw(t_view *view)
 {
 	int			i;
 	pthread_t	threads[THREAD_COUNT];
@@ -79,11 +81,12 @@ static void draw(t_view *view)
 	image_to_view(view, view->image->ptr);
 }
 
-void start_mandel(void)
+void			start_mandel(void)
 {
 	t_view *view;
 
 	view = init_view("Mandelbrot");
+	reset(view);
 	view->draw_func = draw;
 	view->reset_func = reset;
 	set_hooks(view);

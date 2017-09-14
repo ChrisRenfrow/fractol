@@ -6,15 +6,15 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/11 12:07:55 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/06 13:43:15 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 11:03:58 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void new_instance(char *str)
+void	new_instance(char *str)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (!pid)
@@ -33,11 +33,9 @@ void new_instance(char *str)
 	}
 }
 
-int main(int ac, char *av[])
+int		main(int ac, char *av[])
 {
-	// (void)ac;
-	// (void)av;
-	int i;
+	int	i;
 
 	i = 0;
 	if (ac == 1)
@@ -51,6 +49,5 @@ int main(int ac, char *av[])
 		else
 			ft_warning(ft_strjoin("Bad option - Skipping ", av[i]));
 	}
-	// start_julia();
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/25 15:37:31 by crenfrow          #+#    #+#              #
-#    Updated: 2017/09/06 15:10:20 by crenfrow         ###   ########.fr        #
+#    Updated: 2017/09/13 18:26:08 by crenfrow         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ OSXV		= $(sw_vers -productVersion | grep '10.11.[0-9]+')
 FILES		= main view hooks mouse_handler \
 				key_handler draw image color \
 				julia mandel burning_ship utils \
-				render_text parse_schemes \
-				color_scheme thread
+				render_text thread zoom
 
 CFILES		= $(addsuffix .c, $(FILES))
 OFILES		= $(addsuffix .o, $(FILES))
@@ -60,5 +59,5 @@ re: fclean all
 $(NAME): $(SRCFILES)
 	make -C lib/libft
 	make -C $(LIBMLX)
-	# $(CC) $(INCFLAGS) $(SRCFILES) -o $@ $(FLAGS)
-	$(CC) $(DEBUG) $(INCFLAGS) $(SRCFILES) -o $@ $(FLAGS)
+	$(CC) $(INCFLAGS) $(SRCFILES) -o $@ $(FLAGS)
+	# $(CC) $(DEBUG) $(INCFLAGS) $(SRCFILES) -o $@ $(FLAGS)

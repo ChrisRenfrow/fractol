@@ -1,3 +1,4 @@
 -Iinc/
 -Ilib/libft/inc
--Ilib/libmlx/
+-Ilib/libmlx_cap/
+-Ilib/libmlx_sierra/

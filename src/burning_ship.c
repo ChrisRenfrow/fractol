@@ -6,34 +6,40 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:44:23 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/09 21:50:35 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 10:40:28 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void reset(t_view *view)
+static void		reset(t_view *view)
 {
 	view->mouse->x = 0;
 	view->mouse->y = 0;
+	view->x_offset = 1;
+	view->y_offset = 0;
+	view->iter = 50;
+	view->apt = 1.3;
 }
 
-static int eval_pt(t_view *view, double x0, double y0)
+static int		eval_pt(t_view *view, double x0, double y0)
 {
-	int    i;
-	double x;
-	double y;
-	double tmp;
+	int		i;
+	double	x;
+	double	y;
+	double	tmp;
 
 	i = -1;
 	x = (double)(view->mouse->x * -0.001);
 	y = (double)(view->mouse->y * -0.001);
-
-	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) - (view->apt * 0.5);
-	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) - (view->apt * 0.5);
-
+	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) -
+		(view->apt * 0.5);
+	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) -
+		(view->apt * 0.5);
 	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
+		x = fabs(x);
+		y = fabs(y);
 		tmp = (x * x) - (y * y) + x0;
 		y = (2 * x * y) + y0;
 		x = tmp;
@@ -41,11 +47,11 @@ static int eval_pt(t_view *view, double x0, double y0)
 	return (i);
 }
 
-static void eval_rows(t_thread *t)
+static void		eval_rows(t_thread *t)
 {
-	int x;
-	int y;
-	int i;
+	int	x;
+	int	y;
+	int	i;
 
 	i = 0;
 	y = ((WIN_Y / THREAD_COUNT) * t->id) - 2;
@@ -61,10 +67,10 @@ static void eval_rows(t_thread *t)
 	}
 }
 
-static void draw(t_view *view)
+static void		draw(t_view *view)
 {
-	int			i;
 	pthread_t	threads[THREAD_COUNT];
+	int			i;
 
 	i = -1;
 	while (++i < THREAD_COUNT)
@@ -75,11 +81,12 @@ static void draw(t_view *view)
 	image_to_view(view, view->image->ptr);
 }
 
-void start_ship(void)
+void			start_ship(void)
 {
-	t_view *view;
+	t_view	*view;
 
 	view = init_view("🔥 Burning Ship 🔥");
+	reset(view);
 	view->draw_func = draw;
 	view->reset_func = reset;
 	set_hooks(view);

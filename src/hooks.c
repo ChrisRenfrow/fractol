@@ -6,31 +6,31 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:40:26 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/07/01 18:31:51 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 11:01:07 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int my_loop_hook(t_view *view)
+int		my_loop_hook(t_view *view)
 {
 	redraw(view);
 	return (0);
 }
 
-int exit_hook(t_view *view)
+int		exit_hook(t_view *view)
 {
-	(void) view;
+	(void)view;
 	exit(0);
 }
 
-int expose_hook(t_view *view)
+int		expose_hook(t_view *view)
 {
 	printf("Window %s on PID %d exposed\n", view->title, getpid());
 	return (0);
 }
 
-void set_hooks(t_view *v)
+void	set_hooks(t_view *v)
 {
 	mlx_do_key_autorepeatoff(v->mlx);
 	mlx_loop_hook(v->mlx, my_loop_hook, v);
