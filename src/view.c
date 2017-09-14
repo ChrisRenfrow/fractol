@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 16:06:46 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 18:25:51 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 18:56:27 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_view	*init_view(char *win_title)
 	if (!(view->window = mlx_new_window(view->mlx, WIN_X, WIN_Y, view->title)))
 		ft_error("Initializing window - Not enough memory");
 	init_image(view);
+	view->colors = init_default_colors();
 	view->help = 0;
 	view->stat = 0;
 	view->freeze = 0;

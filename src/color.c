@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/25 11:39:20 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 18:26:52 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 18:48:47 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,20 @@ t_rgb	*hex_to_rgb(unsigned int hex)
 	return (rgb);
 }
 
+t_rgb	*init_default_colors(void)
+{
+	t_rgb *colors;
+
+	colors = (t_rgb*)malloc(sizeof(t_rgb) * 5);
+	colors[0] = *init_rgb(68, 202, 255);
+	colors[1] = *init_rgb(62, 232, 222);
+	colors[2] = *init_rgb(81, 255, 181);
+	colors[3] = *init_rgb(62, 232, 98);
+	colors[4] = *init_rgb(113, 255, 81);
+	return (colors);
+}
+
 t_rgb	color_for_escape(t_view *view, int vel)
 {
-	(void)view;
-	t_rgb		color;
-
-	color = *init_rgb(vel * 10, vel * 10, vel * 10);
-	return (color);
+	return (view->colors[vel % 5]);
 }

@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:40:26 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 11:01:07 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:21:16 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		exit_hook(t_view *view)
 
 int		expose_hook(t_view *view)
 {
-	printf("Window %s on PID %d exposed\n", view->title, getpid());
+	(void)view;
 	return (0);
 }
 

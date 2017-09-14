@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/19 18:52:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 18:21:14 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:32:08 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ typedef struct	s_view
 	void	*window;
 	t_image	*image;
 	char	*title;
-	t_list	*schemes;
-	int		scheme_id;
-	int		scheme_ct;
+	t_rgb	*colors;
 	int		iter;
 	int		max_iter;
 	void	*draw_func;
@@ -117,6 +115,8 @@ void			destroy_thread(t_thread *t);
 void			start_julia(void);
 void			start_mandel(void);
 void			start_ship(void);
+
+t_rgb			*init_default_colors(void);
 
 void			redraw(t_view *view);
 void			set_hooks(t_view *view);

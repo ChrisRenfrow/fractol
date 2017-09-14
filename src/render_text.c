@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/14 12:37:06 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 17:26:50 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:28:14 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	print_help(t_view *view)
 		- 1 : displays statistics\n\
 		- mouse movement : modifies\n\
 			real and imaginary numbers\n\
-		- mouse scroll (pgup/pgdwn) :\n\
-			zoom in/out\n\
+		- mouse scroll : zoom in/out\n\
 		- left/right click : increase\n\
 			/decrease iterations (max\n\
 			250 iterations)\n\
+		- WASD : pans view\n\
 		- space : toggles mouse\n\
 			movement\n\
 		- r : reset view\n\

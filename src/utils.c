@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:40:45 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 18:27:27 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:34:07 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	usage(void)
 {
 	ft_putendl("Error: Invalid input");
-	ft_putendl("Usage - ./fractol [fractal name]");
+	ft_putendl("Usage - ./fractol fractal-name [additional fractals]");
 	ft_putendl(AVAILABLE);
 }
 

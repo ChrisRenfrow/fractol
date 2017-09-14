@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:10:22 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 16:37:27 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:22:59 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void		reset(t_view *view)
 {
 	view->mouse->x = WIN_X / 2;
 	view->mouse->y = WIN_Y / 2;
-	view->x_offset = -3;
+	view->x_offset = -1.5;
 	view->y_offset = 0;
 	view->iter = 50;
-	view->apt = 2;
+	view->apt = 2.5;
 }
 
 static int		eval_pt(t_view *view, double x, double y)
@@ -34,10 +34,8 @@ static int		eval_pt(t_view *view, double x, double y)
 	y0 = y;
 	x = (double)((view->mouse->x - (WIN_X / 2)) / WIN_X);
 	y = (double)((view->mouse->y - (WIN_Y / 2)) / WIN_Y);
-	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) -
-		(view->apt * 0.5);
-	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) -
-		(view->apt * 0.5);
+	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset) - (view->apt * 0.5);
+	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset) - (view->apt * 0.5);
 	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
 		tmp = (x * x) - (y * y) + x0;

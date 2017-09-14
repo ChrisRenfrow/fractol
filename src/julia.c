@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 15:39:32 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 11:02:51 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:09:01 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	reset(t_view *view)
 {
 	view->mouse->x = 0;
 	view->mouse->y = 0;
-	view->x_offset = -3.5;
+	view->x_offset = -1.2;
 	view->y_offset = 0;
 	view->iter = 50;
 	view->apt = 3;
@@ -32,10 +32,8 @@ static int	eval_pt(t_view *view, double x, double y)
 	i = 0;
 	x0 = (double)((view->mouse->x - (WIN_X / 2)) / WIN_X);
 	y0 = (double)((view->mouse->y - (WIN_Y / 2)) / WIN_Y);
-	x = ((x / WIN_X) * view->apt) + (view->x_offset / view->apt) -
-		(view->apt * 0.5);
-	y = ((y / WIN_Y) * view->apt) + (view->y_offset / view->apt) -
-		(view->apt * 0.5);
+	x = ((x / WIN_X) * view->apt) + (view->x_offset) - (view->apt * 0.5);
+	y = ((y / WIN_Y) * view->apt) + (view->y_offset) - (view->apt * 0.5);
 	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
 		tmp = (x * x) - (y * y) + x0;

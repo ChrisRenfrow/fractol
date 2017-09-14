@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 13:44:23 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 10:40:28 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:23:09 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void		reset(t_view *view)
 {
 	view->mouse->x = 0;
 	view->mouse->y = 0;
-	view->x_offset = 1;
-	view->y_offset = 0;
+	view->x_offset = -1.2;
+	view->y_offset = -0.6;
 	view->iter = 50;
-	view->apt = 1.3;
+	view->apt = 2.5;
 }
 
 static int		eval_pt(t_view *view, double x0, double y0)
@@ -32,10 +32,8 @@ static int		eval_pt(t_view *view, double x0, double y0)
 	i = -1;
 	x = (double)(view->mouse->x * -0.001);
 	y = (double)(view->mouse->y * -0.001);
-	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset / view->apt) -
-		(view->apt * 0.5);
-	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset / view->apt) -
-		(view->apt * 0.5);
+	x0 = ((x0 / WIN_X) * view->apt) + (view->x_offset) - (view->apt * 0.5);
+	y0 = ((y0 / WIN_Y) * view->apt) + (view->y_offset) - (view->apt * 0.5);
 	while ((++i < view->iter) && ((x * x) + (y * y) < 4))
 	{
 		x = fabs(x);
@@ -85,7 +83,7 @@ void			start_ship(void)
 {
 	t_view	*view;
 
-	view = init_view("🔥 Burning Ship 🔥");
+	view = init_view("Burning Ship");
 	reset(view);
 	view->draw_func = draw;
 	view->reset_func = reset;

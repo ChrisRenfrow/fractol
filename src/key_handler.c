@@ -6,7 +6,7 @@
 /*   By: crenfrow <crenfrow@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/12 19:02:17 by crenfrow          #+#    #+#             */
-/*   Updated: 2017/09/13 18:21:41 by crenfrow         ###   ########.fr       */
+/*   Updated: 2017/09/13 19:26:27 by crenfrow         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,6 @@ int		key_press_hook(int keycode, t_view *view)
 		reset_view(view);
 	if (keycode == KEY_SPACE)
 		view->freeze = (view->freeze) ? 0 : 1;
-	if (keycode == KEY_STDEQU)
-	{
-		view->iter = (view->iter + 1 > view->max_iter) ?
-			view->max_iter : view->iter + 1;
-	}
-	if (keycode == KEY_STDMIN)
-		view->iter = (view->iter - 1 < 0) ? view->max_iter : view->iter - 1;
 	if (keycode == KEY_A)
 		view->x_offset -= view->apt / 50;
 	if (keycode == KEY_D)
